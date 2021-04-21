@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">博物馆导览</string>
+    <string name="Home_name">主页</string>
+    <string name="List_name">排行榜</string>
+    <string name="Map_name">地图</string>
+    <string name="My_name">我的</string>
+</resources>
