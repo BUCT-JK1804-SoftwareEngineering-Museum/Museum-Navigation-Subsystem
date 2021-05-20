@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imp.mapper.MuseumMapper">
+    <resultMap id="BaseResultMap" type="com.imp.model.MuseumModel">
+        <id column="mus_id" jdbcType="BIGINT" property="musId" />
+        <result column="mus_name" jdbcType="VARCHAR" property="musName" />
+        <result column="mus_picture" jdbcType="VARCHAR" property="musPicture" />
+        <result column="mus_grade" jdbcType="DOUBLE" property="musGrade" />
+        <result column="mus_time" jdbcType="VARCHAR" property="musTime" />
+        <result column="mus_phone" jdbcType="VARCHAR" property="musPhone" />
+        <result column="mus_master" jdbcType="VARCHAR" property="musMaster" />
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.imp.model.MuseumModel">
+        <result column="mus_address" jdbcType="LONGVARCHAR" property="musAddress" />
+        <result column="mus_remark" jdbcType="LONGVARCHAR" property="musRemark" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        mus_id,mus_name, mus_picture, mus_grade, mus_time, mus_phone, mus_master
+    </sql>
+
+    <sql id="Blob_Column_List">
+        mus_address, mus_remark
+    </sql>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select * 
+        ,
+        <include refid="Blob_Column_List" />
+        from Museum
+        where mus_id = #{musId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from Museum
+        where mus_id = #{musId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from Museum
+        where mus_id in 
+        <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insert" keyProperty="mus_id" parameterType="com.imp.model.MuseumModel">
+        insert into Museum (
+        <include refid="Base_Column_List" />
+        )
+        values (
+        #{musId,jdbcType=BIGINT},
+        #{musName,jdbcType=VARCHAR},
+            #{musPicture,jdbcType=VARCHAR},
+            #{musGrade,jdbcType=DOUBLE}, 
+            #{musTime,jdbcType=VARCHAR}, 
+            #{musPhone,jdbcType=VARCHAR}, 
+            #{musMaster,jdbcType=VARCHAR}, 
+            #{musAddress,jdbcType=LONGVARCHAR}, 
+            #{musRemark,jdbcType=LONGVARCHAR}
+            )
+    </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        insert into Museum (
+        <include refid="Base_Column_List" />
+        ) values 
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.musId,jdbcType=BIGINT},
+            #{item.musName,jdbcType=VARCHAR},
+                #{item.musPicture,jdbcType=VARCHAR},
+                #{item.musGrade,jdbcType=DOUBLE}, 
+                #{item.musTime,jdbcType=VARCHAR}, 
+                #{item.musPhone,jdbcType=VARCHAR}, 
+                #{item.musMaster,jdbcType=VARCHAR}, 
+                #{item.musAddress,jdbcType=LONGVARCHAR}, 
+                #{item.musRemark,jdbcType=LONGVARCHAR}
+                )
+        </foreach>
+    </insert>
+
+    <select id="selectByModel" parameterType="com.imp.model.MuseumModel" resultMap="BaseResultMap">
+        select * from Museum where 1 = 1
+        <if test="musName != null">
+            and mus_name = #{musName,jdbcType=VARCHAR}
+        </if>
+        <if test="musPicture != null">
+            and mus_picture = #{musPicture,jdbcType=VARCHAR}
+        </if>
+        <if test="musGrade != null">
+            and mus_grade = #{musGrade,jdbcType=DOUBLE}
+        </if>
+        <if test="musTime != null">
+            and mus_time = #{musTime,jdbcType=VARCHAR}
+        </if>
+        <if test="musPhone != null">
+            and mus_phone = #{musPhone,jdbcType=VARCHAR}
+        </if>
+        <if test="musMaster != null">
+            and mus_master = #{musMaster,jdbcType=VARCHAR}
+        </if>
+        <if test="musAddress != null">
+            and mus_address = #{musAddress,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="musRemark != null">
+            and mus_remark = #{musRemark,jdbcType=LONGVARCHAR}
+        </if>
+    </select>
+
+    <insert id="insertSelective" keyProperty="mus_id" parameterType="com.imp.model.MuseumModel">
+        insert into Museum
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="musId != null">
+                mus_id,
+            </if>
+            <if test="musName != null">
+                mus_name,
+            </if>
+            <if test="musPicture != null">
+                mus_picture,
+            </if>
+            <if test="musGrade != null">
+                mus_grade,
+            </if>
+            <if test="musTime != null">
+                mus_time,
+            </if>
+            <if test="musPhone != null">
+                mus_phone,
+            </if>
+            <if test="musMaster != null">
+                mus_master,
+            </if>
+            <if test="musAddress != null">
+                mus_address,
+            </if>
+            <if test="musRemark != null">
+                mus_remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="musId != null">
+                #{musId,jdbcType=BIGINT},
+            </if>
+            <if test="musName != null">
+                #{musName,jdbcType=VARCHAR},
+            </if>
+            <if test="musPicture != null">
+                #{musPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="musGrade != null">
+                #{musGrade,jdbcType=DOUBLE},
+            </if>
+            <if test="musTime != null">
+                #{musTime,jdbcType=VARCHAR},
+            </if>
+            <if test="musPhone != null">
+                #{musPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="musMaster != null">
+                #{musMaster,jdbcType=VARCHAR},
+            </if>
+            <if test="musAddress != null">
+                #{musAddress,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="musRemark != null">
+                #{musRemark,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByIdSelective" parameterType="com.imp.model.MuseumModel">
+        update Museum
+        <set>
+            <if test="musName != null">
+                mus_name = #{musName,jdbcType=VARCHAR},
+            </if>
+            <if test="musPicture != null">
+                mus_picture = #{musPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="musGrade != null">
+                mus_grade = #{musGrade,jdbcType=DOUBLE},
+            </if>
+            <if test="musTime != null">
+                mus_time = #{musTime,jdbcType=VARCHAR},
+            </if>
+            <if test="musPhone != null">
+                mus_phone = #{musPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="musMaster != null">
+                mus_master = #{musMaster,jdbcType=VARCHAR},
+            </if>
+            <if test="musAddress != null">
+                mus_address = #{musAddress,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="musRemark != null">
+                mus_remark = #{musRemark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where mus_id = #{musId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.imp.model.MuseumModel">
+        update Museum
+        set mus_name = #{musName,jdbcType=VARCHAR},
+            mus_picture = #{musPicture,jdbcType=VARCHAR},
+            mus_grade = #{musGrade,jdbcType=DOUBLE},
+            mus_time = #{musTime,jdbcType=VARCHAR},
+            mus_phone = #{musPhone,jdbcType=VARCHAR},
+            mus_master = #{musMaster,jdbcType=VARCHAR},
+            mus_address = #{musAddress,jdbcType=LONGVARCHAR},
+            mus_remark = #{musRemark,jdbcType=LONGVARCHAR}
+        where mus_id = #{musId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateById" parameterType="com.imp.model.MuseumModel">
+        update Museum
+        set mus_name = #{musName,jdbcType=VARCHAR},
+            mus_picture = #{musPicture,jdbcType=VARCHAR},
+            mus_grade = #{musGrade,jdbcType=DOUBLE},
+            mus_time = #{musTime,jdbcType=VARCHAR},
+            mus_phone = #{musPhone,jdbcType=VARCHAR},
+            mus_master = #{musMaster,jdbcType=VARCHAR}
+        where mus_id = #{musId,jdbcType=BIGINT}
+    </update>
+
+</mapper>

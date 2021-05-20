@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        android:background="@drawable/edit_background"
+        android:drawableLeft="@drawable/user"
+        android:drawablePadding="5dp"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:maxLines="1"
+        android:hint="用户名">
+
+    </EditText>
+    <EditText
+        android:id="@+id/password_ed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:drawableLeft="@drawable/pass"
+        android:drawablePadding="5dp"
+        android:maxLines="1"
+        android:hint="密码"
+        android:inputType="textPassword"
+        android:layout_below="@id/username"
+        android:background="@drawable/edit_background"
+        android:layout_marginTop="15dp">
+
+    </EditText>
+    <!--    <Button-->
+    <!--        android:id="@+id/btn_login"-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:layout_marginTop="40dp"-->
+    <!--        android:text="登录"-->
+    <!--        android:layout_marginLeft="30dp"-->
+    <!--        android:layout_below="@id/password">-->
+    <!--    </Button>-->
+
+    <Button
+        android:id="@+id/btn_login_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/password_ed"
+        android:text="登录"
+        android:textColor="#ffffff"
+        android:layout_marginTop="100dp"
+        android:textSize="16sp"
+        android:background="@drawable/btn1"/>
+
+    <!--    <Button-->
+    <!--        android:id="@+id/btn_register"-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:text="注册"-->
+    <!--        android:layout_below="@id/btn_login"-->
+    <!--        android:layout_marginTop="40dp"-->
+    <!--        android:layout_marginLeft="100dp">-->
+
+    <!--    </Button>-->
+
+    <Button
+        android:id="@+id/btn_register_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/btn_login_1"
+        android:text="注册"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:background="@drawable/btn1"/>
+
+    <Button
+        android:id="@+id/btn_logou"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/btn_register_1"
+        android:text="退出登录"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:background="@drawable/btn1"/>
+
+    <Button
+        android:id="@+id/btn_AccountSecurity_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/btn_logou"
+        android:text="账户与安全"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:background="@drawable/btn1"/>
+</RelativeLayout>

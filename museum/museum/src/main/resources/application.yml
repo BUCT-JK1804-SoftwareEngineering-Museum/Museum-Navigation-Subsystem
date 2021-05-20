@@ -1,0 +1,54 @@
+#developer
+server:
+  port: 9000
+
+spring:
+  #db
+  datasource:
+    url: jdbc:mysql://123.56.13.242:3306/museum?useSSL=false&characterEncoding=UTF-8
+    username: root
+    password: Aliyun2021
+  #freemarker
+  freemarker:
+    cache: false
+    request-context-attribute: request
+    suffix: .ftl
+  #tomcat静态文件资源
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/static/,file:${fileRootPath}
+  #upload file
+  servlet:
+    multipart:
+      max-file-size: 128MB
+      max-request-size: 64MB
+
+#mybatis
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    cache-enabled: true
+    map-underscore-to-camel-case: true
+
+#logger
+logging:
+  #log文件
+  file:
+    name: logs/springboot.log
+  #打印sql
+  level:
+    com.imp.mapper: debug
+
+#mysql page helper
+pagehelper:
+  helperDialect: mysql
+
+#postgresql page helper
+#pagehelper:
+#  helperDialect: postgresql
+
+#sqlserver page helper
+#pagehelper:
+#  helperDialect: sqlserver2012
+

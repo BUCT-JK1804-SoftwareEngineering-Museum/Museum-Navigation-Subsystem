@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <ImageView
+        android:id="@+id/imgv_1"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@color/white"
+        android:src="@drawable/set"
+        android:layout_marginBottom="20dp">
+
+    </ImageView>
+    <EditText
+        android:id="@+id/edt_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="昵称"
+        android:layout_marginTop="20dp">
+
+    </EditText>
+    <TextView
+        android:id="@+id/tv_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="性别"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="10dp">
+
+    </TextView>
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rb_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:checked="false"
+            android:text="男">
+
+        </RadioButton>
+        <RadioButton
+            android:id="@+id/rb_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:checked="false"
+            android:text="女">
+
+        </RadioButton>
+        <RadioButton
+            android:id="@+id/rb_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:checked="true"
+            android:text="无">
+
+        </RadioButton>
+    </RadioGroup>
+    <Button
+        android:id="@+id/bt_4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:text="上传头像">
+
+    </Button>
+    <Button
+        android:id="@+id/bt_5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="确定">
+
+    </Button>
+</LinearLayout>

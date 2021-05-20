@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:text="手机号"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/username_ed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_1"
+        android:background="@drawable/edit_background"
+        android:hint="手机号码"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/username_ed"
+        android:layout_marginTop="30dp"
+        android:text="密码"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+
+    <EditText
+        android:id="@+id/password_ed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_2"
+        android:background="@drawable/edit_background"
+        android:hint="需含数字和字母"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/password_ed"
+        android:layout_marginTop="30dp"
+        android:text="昵称"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/user_ed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_3"
+        android:background="@drawable/edit_background"
+        android:hint="汉字或字母"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/tv_5"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/user_ed"
+        android:layout_marginTop="10dp"
+        android:text="性别"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+    <RadioGroup
+        android:id="@+id/rg1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_5"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/sex_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="1"
+            android:checked="true"
+            android:text="男" />
+
+        <RadioButton
+            android:id="@+id/sex_rb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:tag="2"
+            android:text="女" />
+    </RadioGroup>
+    <TextView
+        android:id="@+id/tv_4"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/rg1"
+        android:layout_marginTop="10dp"
+        android:text="角色"
+        android:visibility="gone"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+    <RadioGroup
+        android:id="@+id/rg"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_4"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rb_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="1"
+            android:checked="true"
+            android:text="普通用户" />
+
+        <RadioButton
+            android:id="@+id/rb_rb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:tag="2"
+            android:text="管理员" />
+
+        <RadioButton
+            android:id="@+id/rb_rb3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:tag="3"
+            android:text="超级管理员" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_Aregister"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/rg"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/btn1"
+        android:text="注册"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
+</RelativeLayout>

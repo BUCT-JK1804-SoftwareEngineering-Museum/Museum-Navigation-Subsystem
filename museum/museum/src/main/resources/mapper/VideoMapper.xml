@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imp.mapper.VideoMapper">
+    <resultMap id="BaseResultMap" type="com.imp.model.VideoModel">
+        <id column="vid_id" jdbcType="BIGINT" property="vidId" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="mus_id" jdbcType="BIGINT" property="musId" />
+        <result column="vid_name" jdbcType="VARCHAR" property="vidName" />
+        <result column="vid_addr" jdbcType="VARCHAR" property="vidAddr" />
+        <result column="vid_info" jdbcType="VARCHAR" property="vidInfo" />
+        <result column="vid_status" jdbcType="INTEGER" property="vidStatus" />
+        <result column="exa_id" jdbcType="BIGINT" property="exaId" />
+        <result column="exa_time" jdbcType="TIMESTAMP" property="exaTime" />
+        <result column="vid_time" jdbcType="TIMESTAMP" property="vidTime" />
+        <result column="mus_name" jdbcType="VARCHAR" property="musName" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        vid_id,user_id, mus_id, vid_name, vid_addr, vid_info, vid_status, exa_id, exa_time, vid_time,
+        mus_name
+    </sql>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * 
+        from Video
+        where vid_id = #{vidId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from Video
+        where vid_id = #{vidId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from Video
+        where vid_id in 
+        <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insert" keyProperty="vid_id" parameterType="com.imp.model.VideoModel">
+        insert into Video (
+        <include refid="Base_Column_List" />
+        )
+        values (
+            #{vidId,jdbcType=BIGINT},
+            #{userId,jdbcType=BIGINT},
+            #{musId,jdbcType=BIGINT},
+            #{vidName,jdbcType=VARCHAR}, 
+            #{vidAddr,jdbcType=VARCHAR}, 
+            #{vidInfo,jdbcType=VARCHAR}, 
+            #{vidStatus,jdbcType=INTEGER}, 
+            #{exaId,jdbcType=BIGINT}, 
+            #{exaTime,jdbcType=TIMESTAMP}, 
+            #{vidTime,jdbcType=TIMESTAMP}, 
+            #{musName,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        insert into Video (
+        <include refid="Base_Column_List" />
+        ) values 
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+                #{item.vidId,jdbcType=BIGINT},
+                #{item.userId,jdbcType=BIGINT},
+                #{item.musId,jdbcType=BIGINT},
+                #{item.vidName,jdbcType=VARCHAR}, 
+                #{item.vidAddr,jdbcType=VARCHAR}, 
+                #{item.vidInfo,jdbcType=VARCHAR}, 
+                #{item.vidStatus,jdbcType=INTEGER}, 
+                #{item.exaId,jdbcType=BIGINT}, 
+                #{item.exaTime,jdbcType=TIMESTAMP}, 
+                #{item.vidTime,jdbcType=TIMESTAMP}, 
+                #{item.musName,jdbcType=VARCHAR}
+                )
+        </foreach>
+    </insert>
+
+    <select id="selectByModel" parameterType="com.imp.model.VideoModel" resultMap="BaseResultMap">
+        select * from Video where 1 = 1
+        <if test="userId != null">
+            and user_id = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="musId != null">
+            and mus_id = #{musId,jdbcType=BIGINT}
+        </if>
+        <if test="vidName != null">
+            and vid_name = #{vidName,jdbcType=VARCHAR}
+        </if>
+        <if test="vidAddr != null">
+            and vid_addr = #{vidAddr,jdbcType=VARCHAR}
+        </if>
+        <if test="vidInfo != null">
+            and vid_info = #{vidInfo,jdbcType=VARCHAR}
+        </if>
+        <if test="vidStatus != null">
+            and vid_status = #{vidStatus,jdbcType=INTEGER}
+        </if>
+        <if test="exaId != null">
+            and exa_id = #{exaId,jdbcType=BIGINT}
+        </if>
+        <if test="exaTime != null">
+            and exa_time = #{exaTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="vidTime != null">
+            and vid_time = #{vidTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="musName != null">
+            and mus_name = #{musName,jdbcType=VARCHAR}
+        </if>
+        order by vid_time desc
+    </select>
+
+    <insert id="insertSelective" keyProperty="vid_id" parameterType="com.imp.model.VideoModel">
+        insert into Video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vidId != null">
+                vid_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="musId != null">
+                mus_id,
+            </if>
+            <if test="vidName != null">
+                vid_name,
+            </if>
+            <if test="vidAddr != null">
+                vid_addr,
+            </if>
+            <if test="vidInfo != null">
+                vid_info,
+            </if>
+            <if test="vidStatus != null">
+                vid_status,
+            </if>
+            <if test="exaId != null">
+                exa_id,
+            </if>
+            <if test="exaTime != null">
+                exa_time,
+            </if>
+            <if test="vidTime != null">
+                vid_time,
+            </if>
+            <if test="musName != null">
+                mus_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vidId != null">
+                #{vidId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="musId != null">
+                #{musId,jdbcType=BIGINT},
+            </if>
+            <if test="vidName != null">
+                #{vidName,jdbcType=VARCHAR},
+            </if>
+            <if test="vidAddr != null">
+                #{vidAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="vidInfo != null">
+                #{vidInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="vidStatus != null">
+                #{vidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="exaId != null">
+                #{exaId,jdbcType=BIGINT},
+            </if>
+            <if test="exaTime != null">
+                #{exaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="vidTime != null">
+                #{vidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="musName != null">
+                #{musName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByIdSelective" parameterType="com.imp.model.VideoModel">
+        update Video
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="musId != null">
+                mus_id = #{musId,jdbcType=BIGINT},
+            </if>
+            <if test="vidName != null">
+                vid_name = #{vidName,jdbcType=VARCHAR},
+            </if>
+            <if test="vidAddr != null">
+                vid_addr = #{vidAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="vidInfo != null">
+                vid_info = #{vidInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="vidStatus != null">
+                vid_status = #{vidStatus,jdbcType=INTEGER},
+            </if>
+            <if test="exaId != null">
+                exa_id = #{exaId,jdbcType=BIGINT},
+            </if>
+            <if test="exaTime != null">
+                exa_time = #{exaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="vidTime != null">
+                vid_time = #{vidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="musName != null">
+                mus_name = #{musName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where vid_id = #{vidId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateById" parameterType="com.imp.model.VideoModel">
+        update Video
+        set user_id = #{userId,jdbcType=BIGINT},
+            mus_id = #{musId,jdbcType=BIGINT},
+            vid_name = #{vidName,jdbcType=VARCHAR},
+            vid_addr = #{vidAddr,jdbcType=VARCHAR},
+            vid_info = #{vidInfo,jdbcType=VARCHAR},
+            vid_status = #{vidStatus,jdbcType=INTEGER},
+            exa_id = #{exaId,jdbcType=BIGINT},
+            exa_time = #{exaTime,jdbcType=TIMESTAMP},
+            vid_time = #{vidTime,jdbcType=TIMESTAMP},
+            mus_name = #{musName,jdbcType=VARCHAR}
+        where vid_id = #{vidId,jdbcType=BIGINT}
+    </update>
+
+</mapper>

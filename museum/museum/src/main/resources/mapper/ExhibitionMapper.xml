@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imp.mapper.ExhibitionMapper">
+    <resultMap id="BaseResultMap" type="com.imp.model.ExhibitionModel">
+        <id column="exh_id" jdbcType="BIGINT" property="exhId" />
+        <result column="exh_name" jdbcType="VARCHAR" property="exhName" />
+        <result column="mus_id" jdbcType="BIGINT" property="musId" />
+        <result column="mus_name" jdbcType="VARCHAR" property="musName" />
+        <result column="exh_picture" jdbcType="VARCHAR" property="exhPicture" />
+        <result column="exh_time" jdbcType="VARCHAR" property="exhTime" />
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.imp.model.ExhibitionModel">
+        <result column="exh_info" jdbcType="LONGVARCHAR" property="exhInfo" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        exh_id, exh_name, mus_id, mus_name, exh_picture, exh_time
+    </sql>
+
+    <sql id="Blob_Column_List">
+        exh_info
+    </sql>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select * 
+        ,
+        <include refid="Blob_Column_List" />
+        from Exhibition
+        where exh_id = #{exhId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from Exhibition
+        where exh_id = #{exhId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from Exhibition
+        where exh_id in 
+        <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insert" keyProperty="exh_id" parameterType="com.imp.model.ExhibitionModel">
+        insert into Exhibition (
+        <include refid="Base_Column_List" />
+        )
+        values (
+        #{exhId,jdbcType=BIGINT},
+        #{exhName,jdbcType=VARCHAR},
+            #{musId,jdbcType=BIGINT},
+            #{musName,jdbcType=VARCHAR}, 
+            #{exhPicture,jdbcType=VARCHAR}, 
+            #{exhTime,jdbcType=VARCHAR}, 
+            #{exhInfo,jdbcType=LONGVARCHAR}
+            )
+    </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        insert into Exhibition (
+        <include refid="Base_Column_List" />
+        ) values 
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.exhId,jdbcType=BIGINT},
+            #{item.exhName,jdbcType=VARCHAR},
+                #{item.musId,jdbcType=BIGINT},
+                #{item.musName,jdbcType=VARCHAR}, 
+                #{item.exhPicture,jdbcType=VARCHAR}, 
+                #{item.exhTime,jdbcType=VARCHAR}, 
+                #{item.exhInfo,jdbcType=LONGVARCHAR}
+                )
+        </foreach>
+    </insert>
+
+    <select id="selectByModel" parameterType="com.imp.model.ExhibitionModel" resultMap="BaseResultMap">
+        select * from Exhibition where 1 = 1
+        <if test="exhId != null">
+            and exh_id = #{exhId,jdbcType=BIGINT}
+        </if>
+        <if test="exhName != null">
+            and exh_name = #{exhName,jdbcType=VARCHAR}
+        </if>
+        <if test="musId != null">
+            and mus_id = #{musId,jdbcType=BIGINT}
+        </if>
+        <if test="musName != null">
+            and mus_name = #{musName,jdbcType=VARCHAR}
+        </if>
+        <if test="exhPicture != null">
+            and exh_picture = #{exhPicture,jdbcType=VARCHAR}
+        </if>
+        <if test="exhTime != null">
+            and exh_time = #{exhTime,jdbcType=VARCHAR}
+        </if>
+        <if test="exhInfo != null">
+            and exh_info = #{exhInfo,jdbcType=LONGVARCHAR}
+        </if>
+    </select>
+
+    <insert id="insertSelective" keyProperty="exh_id" parameterType="com.imp.model.ExhibitionModel">
+        insert into Exhibition
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exhId != null">
+                exh_id,
+            </if>
+            <if test="exhName != null">
+                exh_name,
+            </if>
+            <if test="musId != null">
+                mus_id,
+            </if>
+            <if test="musName != null">
+                mus_name,
+            </if>
+            <if test="exhPicture != null">
+                exh_picture,
+            </if>
+            <if test="exhTime != null">
+                exh_time,
+            </if>
+            <if test="exhInfo != null">
+                exh_info,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="exh_id != null">
+                #{exhId,jdbcType=BIGINT},
+            </if>
+            <if test="exhName != null">
+                #{exhName,jdbcType=VARCHAR},
+            </if>
+            <if test="musId != null">
+                #{musId,jdbcType=BIGINT},
+            </if>
+            <if test="musName != null">
+                #{musName,jdbcType=VARCHAR},
+            </if>
+            <if test="exhPicture != null">
+                #{exhPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="exhTime != null">
+                #{exhTime,jdbcType=VARCHAR},
+            </if>
+            <if test="exhInfo != null">
+                #{exhInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByIdSelective" parameterType="com.imp.model.ExhibitionModel">
+        update Exhibition
+        <set>
+            <if test="exhName != null">
+                exh_name = #{exhName,jdbcType=VARCHAR},
+            </if>
+            <if test="musId != null">
+                mus_id = #{musId,jdbcType=BIGINT},
+            </if>
+            <if test="musName != null">
+                mus_name = #{musName,jdbcType=VARCHAR},
+            </if>
+            <if test="exhPicture != null">
+                exh_picture = #{exhPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="exhTime != null">
+                exh_time = #{exhTime,jdbcType=VARCHAR},
+            </if>
+            <if test="exhInfo != null">
+                exh_info = #{exhInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where exh_id = #{exhId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.imp.model.ExhibitionModel">
+        update Exhibition
+        set exh_name = #{exhName,jdbcType=VARCHAR},
+            mus_id = #{musId,jdbcType=BIGINT},
+            mus_name = #{musName,jdbcType=VARCHAR},
+            exh_picture = #{exhPicture,jdbcType=VARCHAR},
+            exh_time = #{exhTime,jdbcType=VARCHAR},
+            exh_info = #{exhInfo,jdbcType=LONGVARCHAR}
+        where exh_id = #{exhId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateById" parameterType="com.imp.model.ExhibitionModel">
+        update Exhibition
+        set exh_name = #{exhName,jdbcType=VARCHAR},
+            mus_id = #{musId,jdbcType=BIGINT},
+            mus_name = #{musName,jdbcType=VARCHAR},
+            exh_picture = #{exhPicture,jdbcType=VARCHAR},
+            exh_time = #{exhTime,jdbcType=VARCHAR}
+        where exh_id = #{exhId,jdbcType=BIGINT}
+    </update>
+
+</mapper>

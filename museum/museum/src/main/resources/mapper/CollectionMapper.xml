@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imp.mapper.CollectionMapper">
+    <resultMap id="BaseResultMap" type="com.imp.model.CollectionModel">
+        <id column="col_id" jdbcType="BIGINT" property="colId" />
+        <result column="mus_id" jdbcType="BIGINT" property="musId" />
+        <result column="col_name" jdbcType="VARCHAR" property="colName" />
+        <result column="col_era" jdbcType="VARCHAR" property="colEra" />
+        <result column="mus_name" jdbcType="VARCHAR" property="musName" />
+        <result column="col_picture" jdbcType="VARCHAR" property="colPicture" />
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.imp.model.CollectionModel">
+        <result column="col_info" jdbcType="LONGVARCHAR" property="colInfo" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        col_id, mus_id, col_name, col_era, mus_name, col_picture
+    </sql>
+
+    <sql id="Blob_Column_List">
+        col_info
+    </sql>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select * 
+        ,
+        <include refid="Blob_Column_List" />
+        from Collection
+        where col_id = #{colId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from Collection
+        where col_id = #{colId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from Collection
+        where col_id in 
+        <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insert" keyProperty="col_id" parameterType="com.imp.model.CollectionModel">
+        insert into Collection (
+        <include refid="Base_Column_List" />
+        )
+        values (
+            #{colId,jdbcType=BIGINT},
+            #{musId,jdbcType=BIGINT},
+            #{colName,jdbcType=VARCHAR},
+            #{colEra,jdbcType=VARCHAR}, 
+            #{musName,jdbcType=VARCHAR}, 
+            #{colPicture,jdbcType=VARCHAR}, 
+            #{colInfo,jdbcType=LONGVARCHAR}
+            )
+    </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        insert into Collection (
+        <include refid="Base_Column_List" />
+        ) values 
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+                #{item.colId,jdbcType=BIGINT},
+                #{item.musId,jdbcType=BIGINT},
+                #{item.colName,jdbcType=VARCHAR},
+                #{item.colEra,jdbcType=VARCHAR}, 
+                #{item.musName,jdbcType=VARCHAR}, 
+                #{item.colPicture,jdbcType=VARCHAR}, 
+                #{item.colInfo,jdbcType=LONGVARCHAR}
+                )
+        </foreach>
+    </insert>
+
+    <select id="selectByModel" parameterType="com.imp.model.CollectionModel" resultMap="BaseResultMap">
+        select * from Collection where 1 = 1
+        <if test="musId != null">
+            and mus_id = #{musId,jdbcType=BIGINT}
+        </if>
+        <if test="colName != null">
+            and col_name = #{colName,jdbcType=VARCHAR}
+        </if>
+        <if test="colEra != null">
+            and col_era = #{colEra,jdbcType=VARCHAR}
+        </if>
+        <if test="musName != null">
+            and mus_name = #{musName,jdbcType=VARCHAR}
+        </if>
+        <if test="colPicture != null">
+            and col_picture = #{colPicture,jdbcType=VARCHAR}
+        </if>
+        <if test="colInfo != null">
+            and col_info = #{colInfo,jdbcType=LONGVARCHAR}
+        </if>
+    </select>
+
+    <insert id="insertSelective" keyProperty="col_id" parameterType="com.imp.model.CollectionModel">
+        insert into Collection
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="colId != null">
+                col_id,
+            </if>
+            <if test="musId != null">
+                mus_id,
+            </if>
+            <if test="colName != null">
+                col_name,
+            </if>
+            <if test="colEra != null">
+                col_era,
+            </if>
+            <if test="musName != null">
+                mus_name,
+            </if>
+            <if test="colPicture != null">
+                col_picture,
+            </if>
+            <if test="colInfo != null">
+                col_info,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="colId != null">
+                #{colId,jdbcType=BIGINT},
+            </if>
+            <if test="musId != null">
+                #{musId,jdbcType=BIGINT},
+            </if>
+            <if test="colName != null">
+                #{colName,jdbcType=VARCHAR},
+            </if>
+            <if test="colEra != null">
+                #{colEra,jdbcType=VARCHAR},
+            </if>
+            <if test="musName != null">
+                #{musName,jdbcType=VARCHAR},
+            </if>
+            <if test="colPicture != null">
+                #{colPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="colInfo != null">
+                #{colInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByIdSelective" parameterType="com.imp.model.CollectionModel">
+        update Collection
+        <set>
+            <if test="musId != null">
+                mus_id = #{musId,jdbcType=BIGINT},
+            </if>
+            <if test="colName != null">
+                col_name = #{colName,jdbcType=VARCHAR},
+            </if>
+            <if test="colEra != null">
+                col_era = #{colEra,jdbcType=VARCHAR},
+            </if>
+            <if test="musName != null">
+                mus_name = #{musName,jdbcType=VARCHAR},
+            </if>
+            <if test="colPicture != null">
+                col_picture = #{colPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="colInfo != null">
+                col_info = #{colInfo,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where col_id = #{colId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.imp.model.CollectionModel">
+        update Collection
+        set mus_id = #{musId,jdbcType=BIGINT},
+            col_name = #{colName,jdbcType=VARCHAR},
+            col_era = #{colEra,jdbcType=VARCHAR},
+            mus_name = #{musName,jdbcType=VARCHAR},
+            col_picture = #{colPicture,jdbcType=VARCHAR},
+            col_info = #{colInfo,jdbcType=LONGVARCHAR}
+        where col_id = #{colId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateById" parameterType="com.imp.model.CollectionModel">
+        update Collection
+        set mus_id = #{musId,jdbcType=BIGINT},
+            col_name = #{colName,jdbcType=VARCHAR},
+            col_era = #{colEra,jdbcType=VARCHAR},
+            mus_name = #{musName,jdbcType=VARCHAR},
+            col_picture = #{colPicture,jdbcType=VARCHAR}
+        where col_id = #{colId,jdbcType=BIGINT}
+    </update>
+
+</mapper>

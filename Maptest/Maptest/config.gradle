@@ -1,0 +1,233 @@
+
+/**
+ *
+ *  全局统一配置文件
+ */
+ext {
+    //true 每个业务Module可以单独开发
+    //false 每个业务Module以lib的方式运行
+    //修改之后需要Sync方可生效
+    isModule = false
+    isApp = [
+            isAppFrom     : 1//1为慧心医生  2为中南里
+    ]
+
+    if(isApp.isAppFrom == 1){
+        appInfo = [
+                versionCode       : 13,
+                versionName       : "3.3.0",
+                applicationId     :  "com.xcyh.ifdr",
+                appName           :  "慧心医生",
+                app_icon          : "@mipmap/ic_launcher",
+                app_round_icon    : "@mipmap/ic_launcher_round",
+                appFrom           : '"huixinyisheng"',
+                jpushAppkey       :  "3efc00036d67f7db81a3e723",//极光
+                easemob_appkey    :  "1103200421107379#hxysqyb", //环信
+                face_licenseID    :  '"xcyh-liicense-face-android"', //人脸识别face_licenseID
+                face_licenseFileName    :  '"idl-license.face-android"', //人脸识别face_licenseFileName
+                buglyAkey         :  '"a7ffbe91cf"',//腾讯bugly
+                vivoPushAppKey    :  "bda19b79781ff10b609a513bd500e284",//vivo推送appkey
+                vivoPushAppId     :  "103920778",//vivo推送appId
+                huaweiPushAppId   :  "102361121",//华为推送appId
+                xiaomi_AppID      :  '"2882303761518429494"',//小米推送appid
+                xiaomi_AppKey     :  '"5681842923494"',//小米推送appkey
+                oppo_AppKey       :  '"09addc5c6c874c92ae56d7474106e7b5"',//oppo推送 appkey
+                oppo_secret       :  '"042bfa2de1074d458a54d5d7fc4aaa77"',//oppo推送 appkey secret
+
+        ]
+    }else if(isApp.isAppFrom == 2){
+        appInfo = [
+                versionCode       : 1,
+                versionName       : "1.0.1",
+                applicationId     :  "com.xczny.app",
+                appFrom           : '"zhongnanli"',
+                appName           :  "中南未来里",
+                app_icon          : "@mipmap/ic_launcher",
+                app_round_icon    : "@mipmap/ic_launcher_round",
+                jpushAppkey       :  "3efc00036d67f7db81a3e7244",
+                easemob_appkey    :  "1103200421107379#hxysqyb", //环信appkey
+                face_licenseID    :  '"xcyh-liicense-face-android"', //人脸识别face_licenseID
+                face_licenseFileName    :  '"idl-license.face-android"', //人脸识别face_licenseFileName
+                buglyAkey         :  '"a7ffbe91cf"',//bugly appkey
+                vivoPushAppKey    :  "bda19b79781ff10b609a513bd500e284",//vivo推送appkey
+                vivoPushAppId     :  "103920778",//vivo推送appId
+                huaweiPushAppId   :  "102361121",//华为推送appId
+                xiaomi_AppID      :  '"2882303761518429494"',//小米appid
+                xiaomi_AppKey     :  '"5681842923494"',//小米appkey
+                oppo_AppKey       :  '"09addc5c6c874c92ae56d7474106e7b5"',//oppoappkey
+                oppo_secret       :  '"042bfa2de1074d458a54d5d7fc4aaa77"',//oppo appkey secret
+        ]
+    }
+
+    //版本号
+    versions = [
+            applicationId                : "com.xcyh.ifdr",        //应用ID
+            versionCode                  :  3,                    //版本号
+            versionName                  : "1.0.3.2",              //版本名称
+
+            compileSdkVersion            : 29,
+            buildToolsVersion            : "29.0.2",
+            minSdkVersion                : 18,
+            targetSdkVersion             : 29,
+
+            androidSupportSdkVersion     : "29.0.2",
+
+            constraintLayoutVersion      : "1.1.1",
+            runnerVersion                : "1.0.1",
+            espressoVersion              : "3.0.1",
+            junitVersion                 : "4.12",
+            annotationsVersion           : "24.0.0",
+            javaSDKVersion               : 1.8,//javaSDK版本
+
+
+            multidexVersion              : "1.0.2",
+            butterknifeVersion           : "10.2.1",
+            arouterApiVersion            : "1.4.0",
+            arouterCompilerVersion       : "1.2.1",
+            arouterannotationVersion     : "1.0.4",
+            eventbusVersion              : "3.2.0",
+            novateVersion                : "1.5.5",
+            loggerVersion                : "2.2.0",
+            fastjsonVersion              : "1.1.54",
+            immersionbarVersion          : "3.0.0",
+            glideVersion                 : "4.8.0",
+            bannerVersion                : "2.1.4",
+            javaxVersion                 : "1.2",
+
+            greendaoVersion              : "3.2.2",
+            pickerViewVersion            : "4.1.6",
+            superAdapterVersion          : "3.6.8",
+            scaleImageViewVersion        : "3.10.0",
+
+            zxingViewVersion             : "1.3",
+            xxpermissionsVersion         : "5.5",
+            rx2JavaVersion               : "2.1.5",
+            rx2AndroidVersion            : "2.0.1",
+            okgo                         : "3.0.4",
+            okrxVersion                  : "2.0.2",
+            BaseRecyclerViewAdapterHelper: "3.0.2",
+            componentsVersion            : "3.0.0",
+            badgeviewVersion             :"1.1.3",
+            agentwebVersion              :"4.1.3",
+            MPAndroidChartVersion        : "3.1.0",
+            FlycoTabLayoutVersion        : "2.1.2",
+            pinyinVersion                : "2.5.0",
+    ]
+    dependencies = [
+            "appcompat_v7"                 : "com.android.support:appcompat-v7:${versions["androidSupportSdkVersion"]}",
+            "constraint_layout"            : "com.android.support.constraint:constraint-layout:${versions["constraintLayoutVersion"]}",
+            "runner"                       : "com.android.support.test:runner:${versions["runnerVersion"]}",
+            "espresso_core"                : "com.android.support.test.espresso:espresso-core:${versions["espressoVersion"]}",
+            "junit"                        : "junit:junit:${versions["junitVersion"]}",
+            "support_annotations"          : "com.android.support:support-annotations:${versions["annotationsVersion"]}",
+            "design"                       : "com.android.support:design:${versions["androidSupportSdkVersion"]}",
+            "support-v4"                   : "com.android.support:support-v4:${versions["androidSupportSdkVersion"]}",
+            "cardview-v7"                  : "com.android.support:cardview-v7:${versions["androidSupportSdkVersion"]}",
+            "recyclerview-v7"              : "com.android.support:recyclerview-v7:${versions["androidSupportSdkVersion"]}",
+
+            //方法数超过65535解决方法64K MultiDex分包方法
+            "multidex"                     : "com.android.support:multidex:${versions["multidexVersion"]}",
+
+            //路由
+            "arouter_api"                  : "com.alibaba:arouter-api:${versions["arouterApiVersion"]}",
+            "arouter_compiler"             : "com.alibaba:arouter-compiler:${versions["arouterCompilerVersion"]}",
+            "arouter_annotation"           : "com.alibaba:arouter-annotation:${versions["arouterannotationVersion"]}",
+
+            //黄油刀
+            "butterknife_compiler"         : "com.jakewharton:butterknife-compiler:${versions["butterknifeVersion"]}",
+            "butterknife"                  : "com.jakewharton:butterknife:${versions["butterknifeVersion"]}",
+
+            //事件订阅
+            "eventbus"                     : "org.greenrobot:eventbus:${versions["eventbusVersion"]}",
+
+            //网络
+            "okgo"                         : "com.lzy.net:okgo:${versions["okgo"]}",
+            "okrx"                         : "com.lzy.net:okrx2:${versions["okrxVersion"]}",
+
+            //日志
+            "logger"                       : "com.orhanobut:logger:${versions["loggerVersion"]}",
+
+            //fastJson
+            "fastjson"                     : "com.alibaba:fastjson:${versions["fastjsonVersion"]}.android",
+
+            //沉浸式状态栏
+            "immersionbar"                 : "com.gyf.immersionbar:immersionbar:${versions["immersionbarVersion"]}",
+
+
+            "components"                   : "com.gyf.immersionbar:immersionbar-components:${versions["componentsVersion"]}",
+
+            //banner
+            "banner"                       : "com.bigkoo:ConvenientBanner:${versions["bannerVersion"]}",
+
+            //图片加载
+//                    "picasso"             : "com.squareup.picasso:picasso:${versions["picassoVersion"]}",
+            "glide"                        : "com.github.bumptech.glide:glide:${versions["glideVersion"]}",
+
+            "glideCompiler"                        : "com.github.bumptech.glide:compiler:${versions["glideVersion"]}",
+
+
+            //数据库
+            "greenDao"                     : "org.greenrobot:greendao:${versions["greendaoVersion"]}",
+
+            //时间,地址,条件选择器
+            "pickerView"                   : "com.contrarywind:Android-PickerView:${versions["pickerViewVersion"]}",
+
+            //万能Adapter
+            "superAdapter"                 : "org.byteam.superadapter:superadapter:${versions["superAdapterVersion"]}",
+
+            "BaseRecyclerViewAdapterHelper": "com.github.CymChad:BaseRecyclerViewAdapterHelper:${versions["BaseRecyclerViewAdapterHelper"]}",
+            //展示大图+手势滑动
+            "scaleImageView"               : "com.davemorrissey.labs:subsampling-scale-image-view:${versions["scaleImageViewVersion"]}",
+
+            //二维码扫描
+            "zxing"                        : "com.github.0xZhangKe:QRCodeView:${versions["zxingViewVersion"]}",
+
+            //危险权限库
+            "xxpermissions"                : "com.hjq:xxpermissions:${versions["xxpermissionsVersion"]}",
+            "badgeview"                    : "q.rorbin:badgeview:${versions["badgeviewVersion"]}",
+
+            //RX家族
+            "rx2_java"                     : "io.reactivex.rxjava2:rxjava:${versions["rx2JavaVersion"]}",
+            "rx2_android"                  : "io.reactivex.rxjava2:rxandroid:${versions["rx2AndroidVersion"]}",
+            "agentweb"                     : "com.just.agentweb:${versions["agentwebVersion"]}",
+            //折线统计图
+            "MPAndroidChart"               : "com.github.PhilJay:MPAndroidChart:v${versions["MPAndroidChartVersion"]}",
+
+            "FlycoTabLayout_Lib"           : "com.flyco.tablayout:FlycoTabLayout_Lib:${versions["FlycoTabLayoutVersion"]}@aar",
+            //汉字转拼音
+            "pinyin4j"                     : "com.belerweb:pinyin4j:${versions["pinyinVersion"]}",
+
+//                    //图片缩放
+//                    "photoview"                      : "com.github.chrisbanes.photoview:library:1.2.4",
+//                    //SmartRefreshLayout
+//                    "smartRefreshLayout"             : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1",
+//                    "SmartRefreshHeader"             : "com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1",
+
+//                   //baseRecyclerViewAdapterHelper
+//                   "baseRecyclerViewAdapterHelper"  : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22",
+//                    //Bugly集成
+//                    "bugly"                          : "com.tencent.bugly:crashreport_upgrade:latest.release",
+//                    //仿ios进度条 已抽取到lib中
+//                    "kprogresshud"                   : "com.kaopiz:kprogresshud:1.1.0",
+
+//                    //Android屏幕适配
+//                    "autolayout"                     : "com.zhy:autolayout:1.4.5",
+//                    //安卓调试神器-Stetho
+//                    "stetho"                         : "com.facebook.stetho:stetho:1.5.0",
+//                    "stetho-okhttp3"                 : "com.facebook.stetho:stetho-okhttp3:1.5.0",
+//                    // 仿ios弹出对话窗体 已抽取到lib中
+//                    "alertview"                      : "com.bigkoo:alertview:1.0.3",
+//                    //bugly sdk
+//                    "tencent-bugly"                  : "com.tencent.bugly:crashreport_upgrade:latest.release",
+//                    //垂直的tabLayout
+//                    "VerticalTabLayout"              : "q.rorbin:VerticalTabLayout:1.2.5",
+//                    //水平tablayout
+//                    "FlycoTabLayout_Lib"             : "com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar",
+//                    //leakcanary内存泄露
+//                    "leakcanary-android"             : "com.squareup.leakcanary:leakcanary-android:1.5.1",
+//                    "leakcanary-android-no-op"       : "com.squareup.leakcanary:leakcanary-android-no-op:1.5.1",
+
+
+    ]
+
+}

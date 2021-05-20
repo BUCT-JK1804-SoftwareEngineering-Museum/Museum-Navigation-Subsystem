@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LL_1"
+    android:orientation="vertical" android:layout_width="200dp"
+    android:layout_height="100dp"
+    android:padding="10dp"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/TV_12"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="7dp"
+        android:layout_height="35dp"
+        android:text="博物馆"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"></TextView>
+    <TextView
+        android:layout_marginLeft="133dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="66dp"
+        android:layout_height="35dp"
+        android:text="详情"
+        android:textSize="16dp"
+        android:textColor="#0033FF"></TextView>
+</LinearLayout>

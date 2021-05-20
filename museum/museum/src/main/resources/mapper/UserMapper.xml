@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imp.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.imp.model.UserModel">
+        <id column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+        <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+        <result column="user_pic" jdbcType="VARCHAR" property="userPic" />
+        <result column="user_gender" jdbcType="VARCHAR" property="userGender" />
+        <result column="user_site" jdbcType="VARCHAR" property="userSite" />
+        <result column="user_level" jdbcType="INTEGER" property="userLevel" />
+        <result column="user_pallow" jdbcType="INTEGER" property="userPallow" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, user_name, user_password, user_phone, user_pic, user_gender, user_site, user_level,
+        user_pallow
+    </sql>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * 
+        from User
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from User
+        where user_id = #{userId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from User
+        where user_id in 
+        <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insert" keyProperty="user_id" parameterType="com.imp.model.UserModel">
+        insert into User (
+        <include refid="Base_Column_List" />
+        )
+        values (
+
+        #{userId,jdbcType=BIGINT},
+        #{userName,jdbcType=VARCHAR},
+            #{userPassword,jdbcType=VARCHAR},
+            #{userPhone,jdbcType=VARCHAR}, 
+            #{userPic,jdbcType=VARCHAR}, 
+            #{userGender,jdbcType=VARCHAR}, 
+            #{userSite,jdbcType=VARCHAR}, 
+            #{userLevel,jdbcType=INTEGER}, 
+            #{userPallow,jdbcType=INTEGER}
+            )
+    </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        insert into User (
+        <include refid="Base_Column_List" />
+        ) values 
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.userId,jdbcType=BIGINT},
+            #{item.userName,jdbcType=VARCHAR},
+                #{item.userPassword,jdbcType=VARCHAR},
+                #{item.userPhone,jdbcType=VARCHAR}, 
+                #{item.userPic,jdbcType=VARCHAR}, 
+                #{item.userGender,jdbcType=VARCHAR}, 
+                #{item.userSite,jdbcType=VARCHAR}, 
+                #{item.userLevel,jdbcType=INTEGER}, 
+                #{item.userPallow,jdbcType=INTEGER}
+                )
+        </foreach>
+    </insert>
+
+    <select id="selectByModel" parameterType="com.imp.model.UserModel" resultMap="BaseResultMap">
+        select * from User where 1 = 1
+        <if test="userName != null">
+            and user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="userPassword != null">
+            and user_password = #{userPassword,jdbcType=VARCHAR}
+        </if>
+        <if test="userPhone != null">
+            and user_phone = #{userPhone,jdbcType=VARCHAR}
+        </if>
+        <if test="userPic != null">
+            and user_pic = #{userPic,jdbcType=VARCHAR}
+        </if>
+        <if test="userGender != null">
+            and user_gender = #{userGender,jdbcType=VARCHAR}
+        </if>
+        <if test="userSite != null">
+            and user_site = #{userSite,jdbcType=VARCHAR}
+        </if>
+        <if test="userLevel != null">
+            and user_level = #{userLevel,jdbcType=INTEGER}
+        </if>
+        <if test="userPallow != null">
+            and user_pallow = #{userPallow,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <insert id="insertSelective" keyProperty="user_id" parameterType="com.imp.model.UserModel">
+        insert into User
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userPassword != null">
+                user_password,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="userPic != null">
+                user_pic,
+            </if>
+            <if test="userGender != null">
+                user_gender,
+            </if>
+            <if test="userSite != null">
+                user_site,
+            </if>
+            <if test="userLevel != null">
+                user_level,
+            </if>
+            <if test="userPallow != null">
+                user_pallow,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{user_id,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userPic != null">
+                #{userPic,jdbcType=VARCHAR},
+            </if>
+            <if test="userGender != null">
+                #{userGender,jdbcType=VARCHAR},
+            </if>
+            <if test="userSite != null">
+                #{userSite,jdbcType=VARCHAR},
+            </if>
+            <if test="userLevel != null">
+                #{userLevel,jdbcType=INTEGER},
+            </if>
+            <if test="userPallow != null">
+                #{userPallow,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByIdSelective" parameterType="com.imp.model.UserModel">
+        update User
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                user_password = #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                user_phone = #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userPic != null">
+                user_pic = #{userPic,jdbcType=VARCHAR},
+            </if>
+            <if test="userGender != null">
+                user_gender = #{userGender,jdbcType=VARCHAR},
+            </if>
+            <if test="userSite != null">
+                user_site = #{userSite,jdbcType=VARCHAR},
+            </if>
+            <if test="userLevel != null">
+                user_level = #{userLevel,jdbcType=INTEGER},
+            </if>
+            <if test="userPallow != null">
+                user_pallow = #{userPallow,jdbcType=INTEGER},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateById" parameterType="com.imp.model.UserModel">
+        update User
+        set user_name = #{userName,jdbcType=VARCHAR},
+            user_password = #{userPassword,jdbcType=VARCHAR},
+            user_phone = #{userPhone,jdbcType=VARCHAR},
+            user_pic = #{userPic,jdbcType=VARCHAR},
+            user_gender = #{userGender,jdbcType=VARCHAR},
+            user_site = #{userSite,jdbcType=VARCHAR},
+            user_level = #{userLevel,jdbcType=INTEGER},
+            user_pallow = #{userPallow,jdbcType=INTEGER}
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+</mapper>
